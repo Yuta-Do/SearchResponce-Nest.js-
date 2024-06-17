@@ -15,7 +15,7 @@ export class SearchController {
       throw new Error('Google API key and Search Engine ID must be provided.');
     }
 
-    console.log(`Search request ${query} received.`);
+    console.log(`Search request & query(="${query}") received.`);
 
     try {
       const response = await axios.get(url);

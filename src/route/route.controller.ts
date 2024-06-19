@@ -7,8 +7,19 @@ export class RouteController {
   async search(
     @Query('origin') origin: string,
     @Query('destination') destination: string,
+    @Query('s') s: string,
   ) {
-    const yahooUrl = `https://transit.yahoo.co.jp/search/print?from=${origin}&to=${destination}&y=2024&m=06&d=18&hh=08&m1=5&m2=0&type=4&s=1`;
+    console.log(
+      `origin = "${origin}", destination = "${destination}" and s = ${s} received`,
+    );
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+
+    const yahooUrl = `https://transit.yahoo.co.jp/search/print?from=${origin}&to=${destination}&y=${year}&m=${month}&d=${day}&hh=08&m1=3&m2=0&type=4&s=${s}`;
+
+    console.log(`url=(${yahooUrl})\n`);
 
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
